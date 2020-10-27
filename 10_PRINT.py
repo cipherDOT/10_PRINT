@@ -1,12 +1,13 @@
 import pygame
 import random
 
-width = 600
-height = 400
+width = 640
+height = 360
 rez = 20
 
 display = pygame.display.set_mode((width, height))
 pygame.display.set_caption('10 PRINT')
+
 
 def main():
     run = True
@@ -23,10 +24,15 @@ def main():
                     for j in range(height // rez):
                         n = random.randint(0, 1)
                         if n == 0:
-                            pygame.draw.line(display, (169, 169, 169), (i*rez, j*rez), (i*rez + rez, j*rez + rez), 4)
+                            pygame.draw.line(
+                                display, (169, 169, 169), (i*rez, j*rez), (i*rez + rez, j*rez + rez), 4)
+                            pygame.display.flip()
                         elif n == 1:
-                            pygame.draw.line(display, (169, 169, 169), (i*rez + rez, j*rez), (i*rez, j*rez + rez), 4)
+                            pygame.draw.line(
+                                display, (169, 169, 169), (i*rez + rez, j*rez), (i*rez, j*rez + rez), 4)
+                            pygame.display.flip()
 
-        pygame.display.flip()
+        
+
 
 main()
