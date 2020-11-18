@@ -1,38 +1,56 @@
-import pygame
-import random
+# 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
 
-width = 640
-height = 360
-rez = 20
+# -------------------------------------------------------------------------------------------------------------------------#
+import pygame
+from pygame.draw import line
+from pygame.time import Clock
+from random import random
+
+# -------------------------------------------------------------------------------------------------------------------------#
+
+width = 600
+height = 400
 
 display = pygame.display.set_mode((width, height))
-pygame.display.set_caption('10 PRINT')
+pygame.display.set_caption('10 PRINT CHR$(205.5+RND(1)); : GOTO 10')
+
+# -------------------------------------------------------------------------------------------------------------------------#
 
 
 def main():
     run = True
+    x = 0
+    y = 0
+    rez = 20
+    clock = Clock()
 
     while run:
-
+        clock.tick(14)
+        n = random()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                display.fill((0, 0, 0))
-                for i in range(width // rez):
-                    for j in range(height // rez):
-                        n = random.randint(0, 1)
-                        if n == 0:
-                            pygame.draw.line(
-                                display, (169, 169, 169), (i*rez, j*rez), (i*rez + rez, j*rez + rez), 4)
-                            pygame.display.flip()
-                        elif n == 1:
-                            pygame.draw.line(
-                                display, (169, 169, 169), (i*rez + rez, j*rez), (i*rez, j*rez + rez), 4)
-                            pygame.display.flip()
+        if n > 0.5:
+            line(display, (220, 220, 220), (x, y), (x + rez, y + rez), 4)
+        elif n <= 0.5:
+            line(display, (220, 220, 220), (x, y + rez), (x + rez, y), 4)
 
-        
+        x += rez
+        if x > width:
+            x = 0
+            y += rez
+
+        if (x > width and y > height):
+            x = 0
+            y = 0
+
+        pygame.display.flip()
+
+# -------------------------------------------------------------------------------------------------------------------------#
 
 
-main()
+if __name__ == '__main__':
+    main()
+
+# -------------------------------------------------------------------------------------------------------------------------#
